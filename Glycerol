@@ -1,0 +1,66 @@
+import sys 
+
+'''def abs(x, y):
+    if x > y:
+        return x - y
+    return y - x
+
+
+def valid(values):
+    temp = values[ : ]    
+    temp.sort()
+    if temp == [1, 2, 3, 4, 5, 6, 7, 8]:
+        diff = [abs(values[0], values[3]), 
+                abs(values[2], values[0]), 
+                abs(values[4], values[0]),
+                abs(values[0], values[1]), 
+                abs(values[1], values[5]),
+                abs(values[1], values[7]), 
+                abs(values[1], values[6])]   #差值
+        diff.sort()
+        if diff == [1, 2, 3, 4, 5, 6, 7]:
+            return True
+    return False'''
+
+def valid(values):
+    temp = values[ : ]    #备份
+    temp.sort()
+    if temp == [1, 2, 3, 4, 5, 6, 7, 8]:
+        def minus(i, j):
+            d = values[i] - values[j]
+            if d > 0:
+                return d
+            return -d
+        diff = [minus(0, 2), minus(0, 3), minus(0, 4), minus(0, 1),
+                minus(1, 5), minus(1, 6), minus(1, 7)]
+        diff.sort()
+        if diff == [1, 2, 3, 4, 5, 6, 7]:
+            return True
+    return False
+
+def output(counter, values):
+    print('     {:d}    {:d}'.format(values[2], values[5]))
+    print('     |    |')
+    print('{:d}----{:d}----{:d}----{:d}'.format(
+      values[3], values[0], values[1], values[6]))
+    print('     |    |')
+    print('     {:d}    {:d}'.format(values[4], values[7]))
+    print()
+    print(counter)
+
+def ganyou():
+    counter = 0
+    for a1 in range(1, 9):
+        for a2 in range(1, 9):
+            for a3 in range(1, 9):
+                for a4 in range(1, 9):
+                    for a5 in range(1, 9):
+                        for a6 in range(1, 9):
+                            for a7 in range(1, 9):
+                                for a8 in range(1, 9):
+                                    values = [a1, a2, a3, a4, a5, a6, a7, a8]
+                                    if valid(values):
+                                        counter += 1
+                                        output(counter, values)
+
+ganyou()
